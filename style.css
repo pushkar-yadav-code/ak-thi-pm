@@ -1,0 +1,80 @@
+/* Custom styles for a high-quality, appealing design */
+body {
+    font-family: 'Poppins', sans-serif; /* Elegant font */
+    line-height: 1.6;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); /* Dark gradient background */
+    color: #fff;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.logo {
+    font-size: 1.5rem; /* Small logo */
+    font-weight: 600;
+    color: #ffd700; /* Gold color */
+    border: 2px solid #ffd700;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* Subtle glow */
+}
+
+.hero {
+    background: linear-gradient(135deg, #6c5ce7 0%, #1a1a2e 100%); /* Purple to navy gradient */
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.3);
+}
+
+.btn-gold {
+    background-color: #ffd700;
+    color: #1a1a2e;
+    border: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+    background-color: #e6c200;
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.shayari-card {
+    margin-bottom: 20px;
+    border: none;
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%); /* Light gradient for cards */
+    color: #333;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 10px;
+}
+
+.shayari-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+}
+
+.shayari-text {
+    font-style: italic;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.text-primary {
+    color: #6c5ce7 !important; /* Purple accent */
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+footer {
+    margin-top: auto;
+    background: #1a1a2e;
+}
+
+/* Smooth scrolling for navigation */
+html {
+    scroll-behavior: smooth;
+}
