@@ -1,4 +1,4 @@
-// Sample shayari data (replace with your own)
+
 const shayariList = [
     {
         title: "Power's Shadow",
@@ -16,10 +16,10 @@ const shayariList = [
         title: "Jate-Jate Ye Malaal",
         text: "जाते-जाते ये मलाल रह गया,\nक्या उन्हें भी मोहब्बत थी, ये सवाल रह गया।\nलब खामोश रहे और आँखें सब कह गईं,\nमगर ज़ुबान से न निकला वो हाल रह गया।\nवो मुड़े थे आख़िरी बार हमें देखने को,\nबस उसी एक पल में सारा साल रह गया।\nउम्र भर की चाहत का सिला कुछ यूँ मिला,\nवो तो चले गए, पर उनका ख़याल रह गया।"
     },
-    // Add more as needed
+    
 ];
 
-// Function to display shayari
+
 function displayShayari() {
     const container = document.getElementById('shayariContainer');
     container.innerHTML = '';
@@ -38,11 +38,11 @@ function displayShayari() {
     });
 }
 
-// Function to generate random shayari
+
 function generateRandomShayari() {
     const randomIndex = Math.floor(Math.random() * shayariList.length);
     alert(`Random Shayari: ${shayariList[randomIndex].text}`);
 }
 
-// Load shayari on page load
+
 document.addEventListener('DOMContentLoaded', displayShayari);
