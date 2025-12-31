@@ -1,4 +1,4 @@
-/* Custom styles for a high-quality, appealing design */
+
 body {
     font-family: 'Poppins', sans-serif; /* Elegant font */
     line-height: 1.6;
@@ -74,7 +74,7 @@ footer {
     background: #1a1a2e;
 }
 
-/* Smooth scrolling for navigation */
+
 html {
     scroll-behavior: smooth;
 }
