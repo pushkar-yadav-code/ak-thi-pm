@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Background Remover - Free HD Tool</title>
+    <!-- Google AdSense (अपना ID डालें) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+    <!-- External CSS Link -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PM Background Remover</h1>
+        <p>Upload any image and get a high-quality HD background-removed version instantly. 100% Free!</p>
+        
+        <!-- AdSense Banner -->
+        <div class="ads">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="upload-area" id="uploadArea">
+            <p>Drag & drop an image here or click to select</p>
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+        <button id="removeBtn" onclick="removeBackground()">Remove Background (HD)</button>
+        <div id="limit-msg" class="limit-msg">Free daily limit: 10 images left.</div>
+        <div id="progress">
+            <div id="progress-bar"></div>
+        </div>
+        <img id="preview" src="" alt="Processed Image">
+        <div id="download">
+            <a id="downloadLink" href="#" download="background_removed_hd.png">Download HD Image</a>
+        </div>
+        
+        <div class="footer">
+            <p>Powered by <a href="https://www.remove.bg/?ref=affiliate" target="_blank">Remove.bg</a> | Support us: <a href="https://www.paypal.com/donate?hosted_button_id=YOUR_BUTTON_ID" target="_blank">Donate</a></p>
+            <p>For premium (unlimited): Contact us for ₹50/month subscription.</p>
+        </div>
+    </div>
+
+    <!-- External JS Link -->
+    <script src="script.js"></script>
+</body>
+</html>

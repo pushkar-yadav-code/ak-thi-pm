@@ -1,48 +1,101 @@
 
-const shayariList = [
-    {
-        title: "Power's Shadow",
-        text: "Ek thi PM, takht pe baithi, Dil mein darr, chehre pe hasi, Zindagi ki kahani, adhuri si..."
-    },
-    {
-        title: "Dreams of the Throne",
-        text: "Sapne the woh, takht ke, Par haqeeqat ne tod diya, Ek thi PM, ab kahani hai..."
-    },
-    {
-        title: "Silent Nights",
-        text: "Raaton mein sochti thi woh, Kal ki baat, aaj ki jhalki, Ek thi PM, dil ki baat..."
-    },
-    {
-        title: "Jate-Jate Ye Malaal",
-        text: "जाते-जाते ये मलाल रह गया,\nक्या उन्हें भी मोहब्बत थी, ये सवाल रह गया।\nलब खामोश रहे और आँखें सब कह गईं,\nमगर ज़ुबान से न निकला वो हाल रह गया।\nवो मुड़े थे आख़िरी बार हमें देखने को,\nबस उसी एक पल में सारा साल रह गया।\nउम्र भर की चाहत का सिला कुछ यूँ मिला,\nवो तो चले गए, पर उनका ख़याल रह गया।"
-    },
-    
-];
+let dailyCount = parseInt(localStorage.getItem('dailyCount') || 0);
+let lastDate = localStorage.getItem('lastDate') || new Date().toDateString();
 
+if (lastDate !== new Date().toDateString()) {
+    dailyCount = 0;
+    localStorage.setItem('lastDate', new Date().toDateString());
+}
+updateLimitMsg();
 
-function displayShayari() {
-    const container = document.getElementById('shayariContainer');
-    container.innerHTML = '';
-    shayariList.forEach(shayari => {
-        const card = `
-            <div class="col-md-4">
-                <div class="card shayari-card">
-                    <div class="card-body">
-                        <h5 class="card-title">${shayari.title}</h5>
-                        <p class="card-text shayari-text">${shayari.text.replace(/\n/g, '<br>')}</p>
-                    </div>
-                </div>
-            </div>
-        `;
-        container.innerHTML += card;
-    });
+const uploadArea = document.getElementById('uploadArea');
+const imageInput = document.getElementById('imageInput');
+const removeBtn = document.getElementById('removeBtn');
+const progress = document.getElementById('progress');
+const progressBar = document.getElementById('progress-bar');
+const preview = document.getElementById('preview');
+const download = document.getElementById('download');
+const downloadLink = document.getElementById('downloadLink');
+
+// Drag & Drop
+uploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadArea.classList.add('dragover');
+});
+uploadArea.addEventListener('dragleave', () => {
+    uploadArea.classList.remove('dragover');
+});
+uploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadArea.classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+        imageInput.files = files;
+        uploadArea.innerHTML = `<p>File selected: ${files[0].name}</p>`;
+    }
+});
+uploadArea.addEventListener('click', () => imageInput.click());
+imageInput.addEventListener('change', () => {
+    if (imageInput.files[0]) {
+        uploadArea.innerHTML = `<p>File selected: ${imageInput.files[0].name}</p>`;
+    }
+});
+
+async function removeBackground() {
+    if (!imageInput.files[0]) {
+        alert('Please select an image first.');
+        return;
+    }
+    if (dailyCount >= 10) {
+        alert('Daily free limit reached! Upgrade to premium for unlimited use.');
+        return;
+    }
+
+    removeBtn.disabled = true;
+    progress.style.display = 'block';
+    preview.style.display = 'none';
+    download.style.display = 'none';
+    progressBar.style.width = '0%';
+
+    const formData = new FormData();
+    formData.append('image_file', imageInput.files[0]);
+    formData.append('size', 'auto'); // HD quality
+
+    try {
+        progressBar.style.width = '50%';
+        const response = await fetch('https://api.remove.bg/v1.0/removebg', {
+            method: 'POST',
+            headers: {
+                'X-Api-Key': 'YOUR_REMOVE_BG_API_KEY' // अपना API key डालें
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to process image. Check API key or try again.');
+        }
+
+        progressBar.style.width = '100%';
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+
+        preview.src = url;
+        preview.style.display = 'block';
+        downloadLink.href = url;
+        download.style.display = 'block';
+
+        dailyCount++;
+        localStorage.setItem('dailyCount', dailyCount);
+        updateLimitMsg();
+    } catch (error) {
+        alert('Error: ' + error.message);
+    } finally {
+        removeBtn.disabled = false;
+        progress.style.display = 'none';
+    }
 }
 
-
-function generateRandomShayari() {
-    const randomIndex = Math.floor(Math.random() * shayariList.length);
-    alert(`Random Shayari: ${shayariList[randomIndex].text}`);
+function updateLimitMsg() {
+    const limitMsg = document.getElementById('limit-msg');
+    limitMsg.textContent = `Free daily limit: ${10 - dailyCount} images left.`;
 }
-
-
-document.addEventListener('DOMContentLoaded', displayShayari);
